@@ -34,12 +34,12 @@ body,
  */
 
 ::-moz-selection {
-  background: #b3d4fc;
+  background: #cc0000;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: #cc0000;
   text-shadow: none;
 }
 
