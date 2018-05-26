@@ -15,7 +15,6 @@ html {
   font-size: 1em;
   line-height: 1.4;
   font-family: 'Lato', sans-serif;
-  background: #fff;
 }
 
 body,
@@ -110,14 +109,15 @@ textarea {
   .odd {
     transform: skew(0deg, 2deg);
   }
-  a {
+  a{
     color: black;
+    
   }
   #particles-js {
     margin-top: -2em;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
+    background-color: #007562;
     background-image: url("");
     background-repeat: no-repeat;
     background-size: cover;
@@ -126,14 +126,14 @@ textarea {
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
   }
   .title {
-    color: black;
+    color: white;
     font-size: 3em;
     margin: 0;
     position: absolute;
     left: 50%;
     top: 50%;
     z-index: 1;
-    transform: translate(-50%, -30%);
+    transform: translate(-50%, -50%);
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -179,10 +179,22 @@ textarea {
     display: none;
     position: fixed;
     z-index: 2;
+<<<<<<< HEAD
     color: #cc0000;
     background-color: #cc0000;
     width: 100%;
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.4);
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 69e3505... header skew
+=======
+    color: #007562;
+    background-color: #007562d0;
+    width: 100%;
+    height: 100vh;
+>>>>>>> parent of 2ded37f... Merge pull request #1 from Gravium/master
+>>>>>>> parent of e122be3... Revert "fixes"
   }
   .open {
     display: block;
@@ -192,11 +204,14 @@ textarea {
     height: 100vh;
     margin-top: 0;
   }
-  .open .logo {
+
+  .open .logo{
+    
     position: absolute;
     left: 50%;
     top: 1em;
     transform: translateX(-50%);
+
   }
   header nav {
     text-align: center;
@@ -206,7 +221,7 @@ textarea {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -120%)
+    transform: translate(-50%, -50%)
   }
   header li {
     list-style: none;
@@ -367,14 +382,25 @@ footer {
     margin-left: auto;
   }
   .header__nav ul {
+<<<<<<< HEAD
     width: 100%;
     transform: translate(-50%, -120%) skew(0, 2deg);
     margin-top: 2em;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 69e3505... header skew
+=======
+    display: flex;
+    position: static;
+    transform: translate(0.0);
+    left: unset;
+>>>>>>> parent of 2ded37f... Merge pull request #1 from Gravium/master
+>>>>>>> parent of e122be3... Revert "fixes"
   }
   .header__nav li {
     list-style: none;
     padding: 0.5em 1em;
-    display: inline;
   }
   header nav a {
     color: white;
@@ -390,6 +416,7 @@ footer {
   header {
     display: flex;
     justify-content: flex-end;
+<<<<<<< HEAD
     transform: translate(0, 0) skew(0deg, -2deg);
     text-align: center;
     left: 0;
@@ -399,6 +426,16 @@ footer {
     height: 0px;
     margin-top: -2em;
     padding: 4em 3em;
+=======
+    transform: translate(0, 0);
+    text-align: left;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    height: auto;
+    padding: 2em 3em;
+>>>>>>> parent of e122be3... Revert "fixes"
     width: unset;
   }
   .title {
