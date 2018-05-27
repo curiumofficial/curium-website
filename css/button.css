@@ -151,21 +151,4 @@ code {
   color: #cc0000;
   font: inherit;
 }
-.buttond {
-  border-color: #FFFFFF:
-  display: inline-block;
-  border: 6px solid;
-  border-radius: 25px;
-  background-color: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 1em;
-  padding: 0.5em 1em;
-  width: 200px;
-  line-height: 1;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 0.5px;
-}
 
-buttond:focus {outline:0 !important;}
