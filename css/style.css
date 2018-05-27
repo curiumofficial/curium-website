@@ -394,7 +394,7 @@ footer {
   header {
     display: flex;
     justify-content: flex-end;
-    transform: translate(0, 0) skew(0deg, -2deg);
+    transform: translate(0, 0) skew(0deg, 0deg);
     text-align: center;
     left: 0;
     right: 0;
