@@ -33,6 +33,27 @@
           transform: translateY(-0.25em);
   background-color: #cc0000;
 }
+.raisel:hover,
+.raisel:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+  background-color: #cc0000;
+}
+.raisem:hover,
+.raisem:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+  background-color: #cc0000;
+}
+.raises:hover,
+.raises:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+  background-color: #cc0000;
+}
 
 .up:hover,
 .up:focus {
@@ -67,6 +88,18 @@
 }
 
 .raise {
+  --color: #cc0000;
+  --hover: #cc0000;
+}
+.raisel {
+  --color: #cc0000;
+  --hover: #cc0000;
+}
+.raisem {
+  --color: #cc0000;
+  --hover: #cc0000;
+}
+.raises {
   --color: #cc0000;
   --hover: #cc0000;
 }
