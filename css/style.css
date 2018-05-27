@@ -372,7 +372,7 @@ footer {
   }
   .header__nav ul {
     width: 100%;
-    transform: translate(-50%, -120%) skew(0, 2deg);
+    transform: translate(-120%, -120%) skew(0, 0deg);
     margin-top: 2em;
   }
   .header__nav li {
@@ -382,7 +382,7 @@ footer {
   }
   header nav a {
     color: white;
-    padding: 0.5em 1em;
+    padding: 1em 1em;
     text-decoration: none;
     font-size: 1em;
   }
