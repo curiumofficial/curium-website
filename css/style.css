@@ -10,7 +10,7 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
+html {f
   color: #222;
   font-size: 1em;
   line-height: 1.4;
@@ -589,7 +589,6 @@ footer {
     height: 300px; /* Should be removed. Only for demonstration */
 }
 
-/* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
