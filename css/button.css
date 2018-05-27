@@ -167,3 +167,5 @@ code {
   cursor: pointer;
   margin: 0.5px;
 }
+button:focus {outline:0 !important;}
+buttond:focus {outline:0 !important;}
