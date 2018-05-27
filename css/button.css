@@ -152,6 +152,7 @@ code {
   font: inherit;
 }
 .buttond {
+  border-color: #FFFFFF:
   display: inline-block;
   border: 2px solid;
   border-radius: 25px;
@@ -159,7 +160,7 @@ code {
   border: 4px;
   color: #FFFFFF;
   text-align: center;
-  font-size: 10px;
+  font-size: 1.3em;
   padding: 1em 2em;
   width: 200px;
   line-height: 1;
