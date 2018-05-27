@@ -154,14 +154,13 @@ code {
 .buttond {
   border-color: #FFFFFF:
   display: inline-block;
-  border: 2px solid;
+  border: 6px solid;
   border-radius: 25px;
   background-color: none;
-  border: 4px;
   color: #FFFFFF;
   text-align: center;
-  font-size: 1.3em;
-  padding: 1em 2em;
+  font-size: 1em;
+  padding: 0.5em 1em;
   width: 200px;
   line-height: 1;
   transition: all 0.5s;
