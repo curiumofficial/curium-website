@@ -282,9 +282,8 @@ textarea {
 }
 
 .wallets img {
-  height: 3em;
-  width: 3em;
-  margin-bottom: 1em;
+  height: 16px;
+  width: 16px;
   display: block;
 }
 
