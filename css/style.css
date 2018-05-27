@@ -595,11 +595,11 @@ footer {
     display: table;
     clear: both;
 }
-#div1 {
+.div1 {
  width:950px;
  height:100px;
 }
-#div2 {
+.div2 {
  width:950px;
  height:100px;
 }
