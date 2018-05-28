@@ -290,7 +290,27 @@ textarea {
   width: 1em;
   display: block;
 }
+.com {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
+.com a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 4em;
+}
+
+.com img {
+  height: 1em;
+  width: 1em;
+  display: block;
+}
 .resources {
   display: flex;
   align-items: center;
