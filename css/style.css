@@ -180,6 +180,9 @@ textarea {
   .swap img {
     height: 5em;
   }
+   .hover-red:hover {
+      color: #cc0000;
+   }
   header {
     display: none;
     position: fixed;
