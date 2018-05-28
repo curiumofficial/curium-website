@@ -602,3 +602,8 @@ footer {
  width: 950px;
  height:  100px;
 }
+.h2span { 
+  margin-top: -300px;        /* Size of fixed header */
+  padding-bottom: 300px; 
+  display: block; 
+}
