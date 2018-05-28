@@ -268,12 +268,8 @@ textarea {
 .subtitle {
   text-align: center;
 }
-.iccon {
-  fill: black;
-}
-.iccon:hover {
-    fill: #e60000;
-}
+fab:hover { color: #cc0000; }
+cc:hover { color: #cc0000; }
 .wallets {
   display: flex;
   align-items: center;
