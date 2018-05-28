@@ -584,9 +584,8 @@ footer {
 /* Create four equal columns that floats next to each other */
 .column {
     float: left;
-    width: 33%;
+    width: 33.33%;
     padding: 10px;
-    height: 50px; /* Should be removed. Only for demonstration */
 }
 
 .row:after {
