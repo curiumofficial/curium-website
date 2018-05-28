@@ -268,7 +268,9 @@ textarea {
 .subtitle {
   text-align: center;
 }
-
+iccon:hover {
+    fill: #e60000;
+}
 .wallets {
   display: flex;
   align-items: center;
