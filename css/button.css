@@ -38,7 +38,7 @@
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
   -webkit-transform: translateY(-0.25em);
           transform: translateY(-0.25em);
-  background-color: #cc0000;
+  background-color: #0000ff;
 }
 .raisem:hover,
 .raisem:focus {
