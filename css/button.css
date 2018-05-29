@@ -148,10 +148,10 @@ h1 {
   font-weight: 400;
 }
 
-code {
-  color: #cc0000;
-  font: inherit;
-}
+#code {
+# color: #cc0000;
+# font: inherit;
+#}
 .buttond {
   border-color: #FFFFFF:
   display: inline-block;
