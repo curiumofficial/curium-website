@@ -169,3 +169,10 @@ h1 {
 }
 
 buttond:focus {outline:0 !important;}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
