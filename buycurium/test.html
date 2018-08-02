@@ -73,73 +73,43 @@
 	</script>
 </head>
 <body>
-<div id="app">
-    <form class="uk-form-horizontal uk-margin-small">
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="stakingAmount">Staking Amount</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="stakingAmount" v-model="stakingAmount">
-            </div><div id="json-data-3-20"></div>
-            <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="totalStaking">Total Staking Coins</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="totalStaking" v-model="totalStaking">
-            </div>
-            <span class="info"><a class="info" href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank">Find here</a> - red & blue pie</span>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="lockedIn">Coins Locked in Masternodes</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="lockedIn" v-model="lockedIn">
-            </div>
-            <span class="info"><a class="info" href="https://masternodes.online/currencies/PHR/" target="_blank">Find here </a> - "coins locked"</span>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="blockRewards">Current Block Rewards (PHR)</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="blockRewards"
-                       v-model="blockRewards">
-            </div>
-            <span class="info"><a href="https://github.com/phoreproject/Phore" target="_blank">Find here</a> - scroll down</span>
-        </div>
-
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="dailyGains">Daily PHR Gained</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="dailyGains" v-model="dailyGains" disabled><label id="dailyGains"></label>
-            </div>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="weeklyGains">Weekly PHR Gained</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="weeklyGains" v-model="weeklyGains" disabled><label id="weeklyGains"></label>
-            </div>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="monthlyGains">Monthly PHR Gained</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="monthlyGains" v-model="monthlyGains" disabled><label id="monthlyGains"></label>
-            </div>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="yearlyGains">Yearly PHR Gained</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="yearlyGains"
-                       v-model="yearlyGains" disabled><label id="yearlyGains"></label>
-            </div>
-        </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label green" for="roi">Return on Investment</label>
-            <div class="uk-form-controls">
-                <input type="text" class="uk-input uk-form-width-medium" id="roi"
-                       v-model="roi" disabled><label id="roi"></label>
-            </div>
-        </div>
-
-    </form>
-</div>
+                <table>
+                    <tr>
+                        <td><label id="entry_coins">Number Of Coins</label></td>
+                        <td><input type="number" id="NumberOfCoinsStart" value="1000" onBlur="return is_int(this)"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><label id="entry_days">Age of transaction (days)</label></td>
+                        <td><input type="number" id="AgeOfTransaction" value="31"></td>
+                        <td style="color:red;font-size:80%" id="AgeOfTransaction_error">Probability maxed at 90 days</td>
+                    </tr>
+                    <tr>
+                        <td><label id="entry_difficulty">POS difficulty</label></td>
+                        <td><input type="number" id="POSDifficulty" value="10"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                <br>
+                <table class=result>
+                    <tr>
+                        <th><label id="prob_mint">Minting POS block within</label></th>
+                        <th><label id="prob_10m">Daily PHR Gained</label></th>
+                        <th><label id="prob_24h">Weekly PHR Gained</label></th>
+                        <th><label id="prob_31d">Monthly PHR Gained</label></th>
+                        <th><label id="prob_90d">Yearly PHR Gained</label></th>
+                        <th><label id="prob_1y">ROI</label></th>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <th><label id="reward_block">Reward</label></td>
+                        <td class=num><label id="dailyGains"></label></td>
+                        <td class=num><label id="weeklyGains"></label></td>
+                        <td class=num><label id="monthlyGains"></label></td>
+                        <td class=num><label id="yearlyGains"></label></td>
+                        <td class=num><label id="roi"></label></td>
+                    </tr>
+                </table>
 </body>
 <script type="application/javascript">
  var run = function() {
