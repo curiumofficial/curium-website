@@ -166,10 +166,10 @@
             };
 
             // Calculate the POS reward dynamically, without having to press a button
-            var totalStakingInput = document.querySelector('#TotalStaking');
-            var stakingAmountInput = document.querySelector('#StakingAmount');
-            var lockedInInput = document.querySelector('#LockedIn');
-			var blockRewardsInput = document.querySelector('#BlockRewards');
+            var totalStakingInput = document.querySelector('#totalStaking');
+            var stakingAmountInput = document.querySelector('#stakingAmount');
+            var lockedInInput = document.querySelector('#lockedIn');
+			var blockRewardsInput = document.querySelector('#blockRewards');
             // Reward is calculated when typing or when the input loses focus
             totalStakingInput.addEventListener('keyup', run);
             totalStakingInput.addEventListener('change', run);
