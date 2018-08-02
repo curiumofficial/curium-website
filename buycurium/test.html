@@ -35,7 +35,7 @@
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = JSON.parse(this.responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				document.getElementById('totalStaking').value = myObj.data[0];
+				document.getElementById('totalStaking').value = myObj.data[0][0];
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
@@ -45,7 +45,7 @@
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = JSON.parse(this.responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				document.getElementById('json-data-3-20').innerHTML = myObj.data[0];
+				document.getElementById('json-data-3-20').innerHTML = myObj.data[0][0];
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
