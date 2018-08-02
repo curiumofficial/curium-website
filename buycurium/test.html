@@ -40,6 +40,17 @@
 		};
 		xmlhttp.open("GET", "num.json", true);
 		xmlhttp.send();	
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);						
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('json-data-3-20').innerHTML = myObj.data[0];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();			
+		
 	</script>
 </head>
 <body>
@@ -49,7 +60,7 @@
             <label class="uk-form-label" for="stakingAmount">Staking Amount</label>
             <div class="uk-form-controls">
                 <input type="number" class="uk-input uk-form-width-medium" id="stakingAmount" v-model="stakingAmount">
-            </div>
+            </div><div id="json-data-3-2"></div>
             <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span>
         </div>
 <input type="hidden" id="totalStaking" value="" />
