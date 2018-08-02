@@ -1,10 +1,12 @@
-<html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Phore Staking Calculator</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
     <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/css/uikit.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/css/uikit.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <!-- UIkit JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit.min.js"></script>
@@ -29,8 +31,74 @@
     </style>
 </head>
 <body>
-<div id="app"><form class="uk-form-horizontal uk-margin-small"><div class="uk-margin-small"><label for="stakingAmount" class="uk-form-label">Staking Amount</label> <div class="uk-form-controls"><input type="number" id="stakingAmount" class="uk-input uk-form-width-medium"></div> <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span></div> <div class="uk-margin-small"><label for="totalStaking" class="uk-form-label">Total Staking Coins</label> <div class="uk-form-controls"><input type="number" id="totalStaking" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank" class="info">Find here</a> - red &amp; blue pie</span></div> <div class="uk-margin-small"><label for="lockedIn" class="uk-form-label">Coins Locked in Masternodes</label> <div class="uk-form-controls"><input type="number" id="lockedIn" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://masternodes.online/currencies/PHR/" target="_blank" class="info">Find here </a> - "coins locked"</span></div> <div class="uk-margin-small"><label for="blockRewards" class="uk-form-label">Current Block Rewards (PHR)</label> <div class="uk-form-controls"><input type="number" id="blockRewards" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://github.com/phoreproject/Phore" target="_blank">Find here</a> - scroll down</span></div> <div class="uk-margin-small"><label for="dailyGains" class="uk-form-label">Daily PHR Gained</label> <div class="uk-form-controls"><input type="number" id="dailyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="weeklyGains" class="uk-form-label">Weekly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="weeklyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="monthlyGains" class="uk-form-label">Monthly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="monthlyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="yearlyGains" class="uk-form-label">Yearly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="yearlyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="roi" class="uk-form-label green">Return on Investment</label> <div class="uk-form-controls"><input type="text" id="roi" disabled="disabled" class="uk-input uk-form-width-medium"></div></div></form></div>
+<div id="app">
+    <form class="uk-form-horizontal uk-margin-small">
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="stakingAmount">Staking Amount</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="stakingAmount" v-model="stakingAmount">
+            </div>
+            <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="totalStaking">Total Staking Coins</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="totalStaking" v-model="totalStaking">
+            </div>
+            <span class="info"><a class="info" href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank">Find here</a> - red & blue pie</span>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="lockedIn">Coins Locked in Masternodes</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="lockedIn" v-model="lockedIn">
+            </div>
+            <span class="info"><a class="info" href="https://masternodes.online/currencies/PHR/" target="_blank">Find here </a> - "coins locked"</span>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="blockRewards">Current Block Rewards (PHR)</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="blockRewards"
+                       v-model="blockRewards">
+            </div>
+            <span class="info"><a href="https://github.com/phoreproject/Phore" target="_blank">Find here</a> - scroll down</span>
+        </div>
 
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="dailyGains">Daily PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="dailyGains" v-model="dailyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="weeklyGains">Weekly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="weeklyGains" v-model="weeklyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="monthlyGains">Monthly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="monthlyGains" v-model="monthlyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="yearlyGains">Yearly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="yearlyGains"
+                       v-model="yearlyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label green" for="roi">Return on Investment</label>
+            <div class="uk-form-controls">
+                <input type="text" class="uk-input uk-form-width-medium" id="roi"
+                       v-model="roi" disabled>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
 <script type="application/javascript">
     var app = new Vue({
         el: '#app',
@@ -74,5 +142,4 @@
         }
     })
 </script>
-
-</body></html>
+</html>
