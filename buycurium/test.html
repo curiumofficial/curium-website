@@ -135,15 +135,6 @@
 		xmlhttp.send();	
     var app = new Vue({
         el: '#app',
-		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);						
-				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				totalStaking = myObj.data[0][0];
-			}
-		};
-		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();	
         data: {
             stakingAmount: '1',
             totalStaking,
