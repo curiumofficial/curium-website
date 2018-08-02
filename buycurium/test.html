@@ -54,193 +54,125 @@
 	</script>
 </head>
 <body>
-        <div id="wrap">
-
-            <article id="content">
-                <table>
-                    <tr>
-                        <td><label id="entry_coins">Number Of Coins</label></td>
-                        <td><input type="number" id="NumberOfCoinsStart" value="1000" onBlur="return is_int(this)"></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td><label id="entry_days">Age of transaction (days)</label></td>
-                        <td><input type="number" id="AgeOfTransaction" value="31"></td>
-                        <td style="color:red;font-size:80%" id="AgeOfTransaction_error">Probability maxed at 90 days</td>
-                    </tr>
-                    <tr>
-                        <td><label id="entry_difficulty">POS difficulty</label></td>
-                        <td><input type="number" id="POSDifficulty" value="10"></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-                <br>
-                <table class=result>
-                    <tr>
-                        <th><label id="prob_mint">Minting POS block within</label></th>
-                        <th><label id="prob_10m">10 min</label></th>
-                        <th><label id="prob_24h">24 hours</label></th>
-                        <th><label id="prob_31d">31 days</label></th>
-                        <th><label id="prob_90d">90 days</label></th>
-                        <th><label id="prob_1y">1 year</label></th>
-                    </tr>
-                    <tr>
-                        <th><label id="prob_prob">Probability</label></th>
-                        <td class=num><label id="probBlockToday"></label></td>
-                        <td class=num><label id="probBlock7d"></label></td>
-                        <td class=num><label id="probBlock31d"></label></td>
-                        <td class=num><label id="probBlock90d"></label></td>
-                        <td class=num><label id="probBlockYear"></label></td>
-                    </tr>
-                    <tr>
-                        <th><label id="reward_block">Reward</label></td>
-                        <td class=num><label id="rewardNextToday"></label></td>
-                        <td class=num><label id="rewardBlock7d"></label></td>
-                        <td class=num><label id="rewardBlock31d"></label></td>
-                        <td class=num><label id="rewardBlock90d"></label></td>
-                        <td class=num><label id="rewardBlockYear"></label></td>
-                    </tr>
-                </table>
-                <br>
-            </article>
-            <footer>
-                <a id="footer_peer4commit" href="http://peer4commit.com/projects/5" target="_blank">Donate to the development of this project</a>
-                <a id="footer_peercointalk" href="http://donate.peercointalk.org/" target="_blank">Donate to Peercointalk projects</a>
-                <a id="footer_github" href="https://github.com/FuzzyBearBTC/peercoin-POSCalculator" target="_blank">Contribute to this project on GitHub</a>
-            </footer>
+<div id="app">
+    <form class="uk-form-horizontal uk-margin-small">
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="stakingAmount">Staking Amount</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="stakingAmount" v-model="stakingAmount">
+            </div><div id="json-data-3-20"></div>
+            <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span>
         </div>
-        <noscript>
-            <section id=noscript>
-                <p>Peercoin POS Calculator requires JavaScript. Please enable it in your browser and refresh.
-            </section>
-        </noscript>
-</body>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="totalStaking">Total Staking Coins</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="totalStaking" v-model="totalStaking">
+            </div>
+            <span class="info"><a class="info" href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank">Find here</a> - red & blue pie</span>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="lockedIn">Coins Locked in Masternodes</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="lockedIn" v-model="lockedIn">
+            </div>
+            <span class="info"><a class="info" href="https://masternodes.online/currencies/PHR/" target="_blank">Find here </a> - "coins locked"</span>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="blockRewards">Current Block Rewards (PHR)</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="blockRewards"
+                       v-model="blockRewards">
+            </div>
+            <span class="info"><a href="https://github.com/phoreproject/Phore" target="_blank">Find here</a> - scroll down</span>
+        </div>
 
-        <script>
-            var is_int = function(value) {
-                return ((parseFloat(value) === parseInt(value)) && !isNaN(value));
-            };
-            var toFixed = function(value, precision) {
-                precision = (precision || 0);
-                var neg = (value < 0);
-                var power = Math.pow(10, precision);
-                value = Math.round(value * power);
-                var integral = String((neg ? Math.ceil : Math.floor)(value / power));
-                var fraction = String((neg ? -value : value) % power);
-                var padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
-                var res = precision ? (integral + '.' +  padding + fraction) : integral;
-                return res;
-            };
-            var calculateProbStake = function(days, coins, difficulty) {
-                var prob = 0;
-                if (days > 30) {
-                    var maxTarget = Math.pow(2, 224);
-                    var target = maxTarget / difficulty;
-                    var dayWeight = Math.min(days, 90) - 30;
-                    prob = (target * coins * dayWeight) / Math.pow(2, 256);
-                }
-                return prob;
-            };
-            var calculateProbBlockToday = function(days, coins, difficulty) {
-                var prob = calculateProbStake(days, coins, difficulty);
-                var res = 1 - Math.pow(1 - prob, 60 * 10 * 6 * 24);
-                return res;
-            };
-            var calculateProbBlockNDays = function(days, coins, difficulty, n) {
-                var prob = 1;
-                var p = 0;
-                for (var i = 0; i < n; i++) {
-                    p = calculateProbBlockToday(parseFloat(days) + i, coins, difficulty);
-                    prob = prob * (1 - p);
-                }
-                prob = 1 - prob;
-                return prob;
-            };
-            var calculateReward = function(days, coins) {
-                var res = 0;
-                if (days > 30) {
-                    res = 0.01 * (days * coins * 33) / (365 * 33 + 8);
-                }
-                return toFixed(res, 2);
-            };
-            var run = function() {
-                var coinValue = document.getElementById('NumberOfCoinsStart').value;
-                var Days = document.getElementById('AgeOfTransaction').value;
-                var difficulty = document.getElementById('POSDifficulty').value;
-                if (Days > 90) {
-                    $('#AgeOfTransaction_error').show();
-                }
-                else {
-                    $('#AgeOfTransaction_error').hide();
-                }
-                // Minting probabilities
-                var probBlockToday = calculateProbBlockToday(Days, coinValue, difficulty);
-                var probBlock7d = calculateProbBlockNDays(Days, coinValue, difficulty, 7);
-                var probBlock31d = calculateProbBlockNDays(Days, coinValue, difficulty, 31);
-                var probBlock90d = calculateProbBlockNDays(Days, coinValue, difficulty, 90);
-                var probBlockYear = calculateProbBlockNDays(Days, coinValue, difficulty, 365);
-                document.getElementById('probBlockToday').innerHTML = toFixed(probBlockToday * 100, 6) + '%';
-                document.getElementById('probBlock7d').innerHTML = toFixed(probBlock7d * 100, 6) + '%';
-                document.getElementById('probBlock31d').innerHTML = toFixed(probBlock31d * 100, 6) + '%';
-                document.getElementById('probBlock90d').innerHTML = toFixed(probBlock90d * 100, 6) + '%';
-                document.getElementById('probBlockYear').innerHTML = toFixed(probBlockYear * 100, 6) + '%';
-                // Rewards
-                var rewardNextToday = calculateReward(parseFloat(Days) 1, coinValue);
-                var rewardBlock7d = calculateReward(parseFloat(Days) + 7, coinValue);
-                var rewardBlock31d = calculateReward(parseFloat(Days) + 31, coinValue);
-                var rewardBlock90d = calculateReward(parseFloat(Days) + 90, coinValue);
-                var rewardBlockYear = calculateReward(parseFloat(Days) + 365, coinValue);
-                document.getElementById('rewardNextToday').innerHTML = toFixed(rewardNextToday, 2) + ' PHR';
-                document.getElementById('rewardBlock7d').innerHTML = toFixed(rewardBlock7d, 2) + ' PHR';
-                document.getElementById('rewardBlock31d').innerHTML = toFixed(rewardBlock31d, 2) + ' PHR';
-                document.getElementById('rewardBlock90d').innerHTML = toFixed(rewardBlock90d, 2) + ' PHR';
-                document.getElementById('rewardBlockYear').innerHTML = toFixed(rewardBlockYear, 2) + ' PHR';
-            };
-            var translate_page = function(lang) {
-                var id;
-                var dict;
-                if (lang === "undefined") {
-                    lang = "en";
-                }
-                dict = translations[lang];
-                for (id in dict) {
-                    if (document.getElementById(id)) {
-                        if (document.getElementById(id).value) {
-                            document.getElementById(id).value = dict[id];
-                        } else {
-                            document.getElementById(id).innerHTML = dict[id];
-                        }
-                    }
-                }
-            };
-            translate_page();
-            // Calculate the POS reward dynamically, without having to press a button
-            var coinValueInput = document.querySelector('#NumberOfCoinsStart');
-            var daysInput = document.querySelector('#AgeOfTransaction');
-            var difficultyInput = document.querySelector('#POSDifficulty');
-            // Reward is calculated when typing or when the input loses focus
-            coinValueInput.addEventListener('keyup', run);
-            coinValueInput.addEventListener('change', run);
-            daysInput.addEventListener('keyup', run);
-            daysInput.addEventListener('change', run);
-            difficultyInput.addEventListener('keyup', run);
-            difficultyInput.addEventListener('change', run);
-            // Because it runs dynamically, it should run at least once initially
-            run();
-            // Dynamically pull the current POS difficulty using peerchain's api and YQL to bypass cross-origin-request restrictions.
-	    // to do - add curecoin api
-            $.ajax({
-                url: "http://query.yahooapis.com/v1/public/yql",
-                jsonp: "callback",
-                dataType: "jsonp",
-                data: {
-                    q: "select * from json where url=\"http://peerchain.net/api/network/last\"",
-                    format: "json"
-                },
-                success: function( response ) {
-                    difficultyInput.value = response.query.results.json.pos_difficulty;
-                    run();
-                }
-            });
-        </script>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="dailyGains">Daily PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="dailyGains" v-model="dailyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="weeklyGains">Weekly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="weeklyGains" v-model="weeklyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="monthlyGains">Monthly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="monthlyGains" v-model="monthlyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label" for="yearlyGains">Yearly PHR Gained</label>
+            <div class="uk-form-controls">
+                <input type="number" class="uk-input uk-form-width-medium" id="yearlyGains"
+                       v-model="yearlyGains" disabled>
+            </div>
+        </div>
+        <div class="uk-margin-small">
+            <label class="uk-form-label green" for="roi">Return on Investment</label>
+            <div class="uk-form-controls">
+                <input type="text" class="uk-input uk-form-width-medium" id="roi"
+                       v-model="roi" disabled>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+<script type="application/javascript">
+
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);						
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				totalStaking = myObj.data[0][0];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();	
+    var app = new Vue({
+        el: '#app',
+        var totalStaking =	document.getElementById('totalStaking').value;	
+        data: {
+            stakingAmount: '1',
+            lockedIn: '5010000',
+            blockRewards: '2.8'
+        },
+        computed: {
+            staked: function () {
+                return this.totalStaking - this.lockedIn;
+            },
+            dailyStakes: function () {
+                return (this.stakingAmount/this.staked*60*24);
+            },
+            weeklyStakes: function () {
+                return (this.dailyStakes*7);
+            },
+            monthlyStakes: function () {
+                return (this.dailyStakes*30);
+            },
+            yearlyStakes: function () {
+                return (this.dailyStakes*365);
+            },
+            dailyGains: function () {
+                return (this.dailyStakes * this.blockRewards).toFixed(5);
+            },
+            weeklyGains: function () {
+                return (this.weeklyStakes * this.blockRewards).toFixed(5);
+            },
+            monthlyGains: function () {
+                return (this.monthlyStakes * this.blockRewards).toFixed(5);
+            },
+            yearlyGains: function () {
+                return (this.yearlyStakes * this.blockRewards).toFixed(5);
+            },
+            roi: function () {
+                return ((this.yearlyGains / this.stakingAmount)*100).toFixed(5)+"%";
+            }
+        }
+    })
+</script>
 </html>
