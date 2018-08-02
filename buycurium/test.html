@@ -35,22 +35,41 @@
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = JSON.parse(this.responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				document.getElementById('totalStaking').value = myObj.data[0][0];
+				document.getElementById('stakingAmount').value = myObj.data[0][0];
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();	
+		xmlhttp.send();			
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = JSON.parse(this.responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				document.getElementById('totalStaking').innerHTML = myObj.data[0][0];
+				document.getElementById('totalStaking').value = myObj.data[0][1];
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();			
-		
+		xmlhttp.send();		
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);						
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('lockedIn').value = myObj.data[0][2];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);						
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('blockRewards').value = myObj.data[0][3];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();				
 	</script>
 </head>
 <body>
@@ -123,47 +142,43 @@
 </div>
 </body>
 <script type="application/javascript">
+ var run = function() {
+                var stakingAmount = document.getElementById('stakingAmount').value; 
+                var totalStaking = document.getElementById('totalStaking').value;
+                var lockedIn = document.getElementById('lockedIn').value;
+				var blockRewards = document.getElementById('blockRewards').value;
+                // Minting probabilities
+                var staked = this.totalStaking - this.lockedIn;
+                var dailyStakes = (this.stakingAmount/this.staked*60*24);
+                var weeklyStakes = (this.dailyStakes*7);
+                var monthlyStakes = (this.dailyStakes*30);
+                var yearlyStakes = (this.dailyStakes*365);
+                var dailyGains = (this.dailyStakes * this.blockRewards).toFixed(5);
+                var weeklyGains = (this.weeklyStakes * this.blockRewards).toFixed(5);
+                var monthlyGains = (this.monthlyStakes * this.blockRewards).toFixed(5);
+                var yearlyGains = (this.yearlyStakes * this.blockRewards).toFixed(5);
+                var roi = ((this.yearlyGains / this.stakingAmount)*100).toFixed(5)+"%";				
+                document.getElementById('dailyGains').innerHTML = dailyGains + ' PHR';
+                document.getElementById('weeklyGains').innerHTML = weeklyGains + ' PHR';
+                document.getElementById('monthlyGains').innerHTML = monthlyGains + ' PHR';
+                document.getElementById('yearlyGains').innerHTML = yearlyGains + ' PHR';
+                document.getElementById('roi').innerHTML = roi;
+            };
 
-    var app = new Vue({
-        el: '#app',
-        var totalStaking =	document.getElementById('totalStaking').value;	
-        data: {
-            stakingAmount: '1',
-            lockedIn: '5010000',
-            blockRewards: '2.8'
-        },
-        computed: {
-            staked: function () {
-                return this.totalStaking - this.lockedIn;
-            },
-            dailyStakes: function () {
-                return (this.stakingAmount/this.staked*60*24);
-            },
-            weeklyStakes: function () {
-                return (this.dailyStakes*7);
-            },
-            monthlyStakes: function () {
-                return (this.dailyStakes*30);
-            },
-            yearlyStakes: function () {
-                return (this.dailyStakes*365);
-            },
-            dailyGains: function () {
-                return (this.dailyStakes * this.blockRewards).toFixed(5);
-            },
-            weeklyGains: function () {
-                return (this.weeklyStakes * this.blockRewards).toFixed(5);
-            },
-            monthlyGains: function () {
-                return (this.monthlyStakes * this.blockRewards).toFixed(5);
-            },
-            yearlyGains: function () {
-                return (this.yearlyStakes * this.blockRewards).toFixed(5);
-            },
-            roi: function () {
-                return ((this.yearlyGains / this.stakingAmount)*100).toFixed(5)+"%";
-            }
-        }
-    })
+            translate_page();
+            // Calculate the POS reward dynamically, without having to press a button
+            var totalStakingInput = document.querySelector('#TotalStaking');
+            var stakingAmountInput = document.querySelector('#StakingAmount');
+            var lockedInInput = document.querySelector('#LockedIn');
+			var blockRewardsInput = document.querySelector('#BlockRewards');
+            // Reward is calculated when typing or when the input loses focus
+            totalStakingInput.addEventListener('keyup', run);
+            totalStakingInput.addEventListener('change', run);
+            stakingAmountInput.addEventListener('keyup', run);
+            stakingAmountInput.addEventListener('change', run);
+            lockedInInput.addEventListener('keyup', run);
+            lockedInInput.addEventListener('change', run);	
+            blockRewardsInput.addEventListener('keyup', run);
+            blockRewardsInput.addEventListener('change', run);			
 </script>
 </html>
