@@ -1,0 +1,78 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Phore Staking Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/css/uikit.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.39/js/uikit-icons.min.js"></script>
+    <style>
+        html {
+            background-color: #f9f9f9;
+        }
+        #app{
+            padding:1em;
+            font-family: 'Varela Round', sans-serif;
+        }
+        .info {
+            font-size: 12px;
+        }
+        .green {
+            color: #006600;
+        }
+        .uk-form-label{
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div id="app"><form class="uk-form-horizontal uk-margin-small"><div class="uk-margin-small"><label for="stakingAmount" class="uk-form-label">Staking Amount</label> <div class="uk-form-controls"><input type="number" id="stakingAmount" class="uk-input uk-form-width-medium"></div> <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span></div> <div class="uk-margin-small"><label for="totalStaking" class="uk-form-label">Total Staking Coins</label> <div class="uk-form-controls"><input type="number" id="totalStaking" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank" class="info">Find here</a> - red &amp; blue pie</span></div> <div class="uk-margin-small"><label for="lockedIn" class="uk-form-label">Coins Locked in Masternodes</label> <div class="uk-form-controls"><input type="number" id="lockedIn" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://masternodes.online/currencies/PHR/" target="_blank" class="info">Find here </a> - "coins locked"</span></div> <div class="uk-margin-small"><label for="blockRewards" class="uk-form-label">Current Block Rewards (PHR)</label> <div class="uk-form-controls"><input type="number" id="blockRewards" class="uk-input uk-form-width-medium"></div> <span class="info"><a href="https://github.com/phoreproject/Phore" target="_blank">Find here</a> - scroll down</span></div> <div class="uk-margin-small"><label for="dailyGains" class="uk-form-label">Daily PHR Gained</label> <div class="uk-form-controls"><input type="number" id="dailyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="weeklyGains" class="uk-form-label">Weekly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="weeklyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="monthlyGains" class="uk-form-label">Monthly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="monthlyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="yearlyGains" class="uk-form-label">Yearly PHR Gained</label> <div class="uk-form-controls"><input type="number" id="yearlyGains" disabled="disabled" class="uk-input uk-form-width-medium"></div></div> <div class="uk-margin-small"><label for="roi" class="uk-form-label green">Return on Investment</label> <div class="uk-form-controls"><input type="text" id="roi" disabled="disabled" class="uk-input uk-form-width-medium"></div></div></form></div>
+
+<script type="application/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            stakingAmount: '1',
+            totalStaking: '8986221',
+            lockedIn: '5010000',
+            blockRewards: '2.8'
+        },
+        computed: {
+            staked: function () {
+                return this.totalStaking - this.lockedIn;
+            },
+            dailyStakes: function () {
+                return (this.stakingAmount/this.staked*60*24);
+            },
+            weeklyStakes: function () {
+                return (this.dailyStakes*7);
+            },
+            monthlyStakes: function () {
+                return (this.dailyStakes*30);
+            },
+            yearlyStakes: function () {
+                return (this.dailyStakes*365);
+            },
+            dailyGains: function () {
+                return (this.dailyStakes * this.blockRewards).toFixed(5);
+            },
+            weeklyGains: function () {
+                return (this.weeklyStakes * this.blockRewards).toFixed(5);
+            },
+            monthlyGains: function () {
+                return (this.monthlyStakes * this.blockRewards).toFixed(5);
+            },
+            yearlyGains: function () {
+                return (this.yearlyStakes * this.blockRewards).toFixed(5);
+            },
+            roi: function () {
+                return ((this.yearlyGains / this.stakingAmount)*100).toFixed(5)+"%";
+            }
+        }
+    })
+</script>
+
+</body></html>
