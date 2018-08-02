@@ -32,8 +32,8 @@
 	<script>
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);						
+			if (readyState == 4 && status == 200) {
+				var myObj = JSON.parse(responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
 				document.getElementById('stakingAmount').value = myObj.data[0][0];
 			}
@@ -42,8 +42,8 @@
 		xmlhttp.send();			
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);						
+			if (readyState == 4 && status == 200) {
+				var myObj = JSON.parse(responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
 				document.getElementById('totalStaking').value = myObj.data[0][1];
 			}
@@ -52,8 +52,8 @@
 		xmlhttp.send();		
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);						
+			if (readyState == 4 && status == 200) {
+				var myObj = JSON.parse(responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
 				document.getElementById('lockedIn').value = myObj.data[0][2];
 			}
@@ -62,8 +62,8 @@
 		xmlhttp.send();
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);						
+			if (readyState == 4 && status == 200) {
+				var myObj = JSON.parse(responseText);						
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
 				document.getElementById('blockRewards').value = myObj.data[0][3];
 			}
@@ -76,7 +76,7 @@
                 <table>
                     <tr>
                         <td><label id="entry_coins">stakingAmount</label></td>
-                        <td><input type="number" id="stakingAmount" value="" onBlur="return is_int(this)"></td>
+                        <td><input type="number" id="stakingAmount" value="" onBlur="return is_int("></td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
@@ -122,16 +122,16 @@
                 var lockedIn = document.getElementById('lockedIn').value;
 				var blockRewards = document.getElementById('blockRewards').value;
                 // Minting probabilities
-                var staked = this.totalStaking - this.lockedIn;
-                var dailyStakes = (this.stakingAmount/this.staked*60*24);
-                var weeklyStakes = (this.dailyStakes*7);
-                var monthlyStakes = (this.dailyStakes*30);
-                var yearlyStakes = (this.dailyStakes*365);
-                var dailyGains = (this.dailyStakes * this.blockRewards).toFixed(5);
-                var weeklyGains = (this.weeklyStakes * this.blockRewards).toFixed(5);
-                var monthlyGains = (this.monthlyStakes * this.blockRewards).toFixed(5);
-                var yearlyGains = (this.yearlyStakes * this.blockRewards).toFixed(5);
-                var roi = ((this.yearlyGains / this.stakingAmount)*100).toFixed(5)+"%";				
+                var staked = totalStaking - lockedIn;
+                var dailyStakes = stakingAmount/staked*60*24;
+                var weeklyStakes = (dailyStakes*7);
+                var monthlyStakes = (dailyStakes*30);
+                var yearlyStakes = (dailyStakes*365);
+                var dailyGains = (dailyStakes * blockRewards).toFixed(5);
+                var weeklyGains = (weeklyStakes * blockRewards).toFixed(5);
+                var monthlyGains = (monthlyStakes * blockRewards).toFixed(5);
+                var yearlyGains = (yearlyStakes * blockRewards).toFixed(5);
+                var roi = ((yearlyGains / stakingAmount)*100).toFixed(5)+"%";				
                 document.getElementById('dailyGains').innerHTML = dailyGains + ' PHR';
                 document.getElementById('weeklyGains').innerHTML = weeklyGains + ' PHR';
                 document.getElementById('monthlyGains').innerHTML = monthlyGains + ' PHR';
