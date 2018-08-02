@@ -29,24 +29,30 @@
             font-weight: 600;
         }
     </style>
+	<script>
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);						
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('totalStaking').value = myObj.data[0];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();	
+	</script>
 </head>
 <body>
 <div id="app">
     <form class="uk-form-horizontal uk-margin-small">
-        <div class="uk-margin-small">33
+        <div class="uk-margin-small">
             <label class="uk-form-label" for="stakingAmount">Staking Amount</label>
             <div class="uk-form-controls">
                 <input type="number" class="uk-input uk-form-width-medium" id="stakingAmount" v-model="stakingAmount">
             </div>
             <span class="info">You'll have to stake this amount 24/7 for the estimation to be correct</span>
         </div>
-        <div class="uk-margin-small">
-            <label class="uk-form-label" for="totalStaking">Total Staking Coins</label>
-            <div class="uk-form-controls">
-                <input type="number" class="uk-input uk-form-width-medium" id="totalStaking" v-model="totalStaking" value="500">
-            </div>
-            <span class="info"><a class="info" href="https://chainz.cryptoid.info/phr/#!extraction" target="_blank">Find here</a> - red & blue pie</span>
-        </div>
+<input type="hidden" id="totalStaking" value="" />
         <div class="uk-margin-small">
             <label class="uk-form-label" for="lockedIn">Coins Locked in Masternodes</label>
             <div class="uk-form-controls">
