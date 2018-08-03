@@ -29,7 +29,8 @@
             font-weight: 600;
         }
     </style>
-	<script>
+	<script> 
+	<!--
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -69,7 +70,7 @@
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();		
+		xmlhttp.send();	//-->	
 		run();
 	</script>
 </head>
@@ -117,6 +118,47 @@
                 </table>
 </body>
 <script type="application/javascript">
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);							
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('stakingAmount').value = myObj.data[0][0];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();			
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);							
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('totalStaking').value = myObj.data[0][1];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();		
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);							
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('lockedIn').value = myObj.data[0][2];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var myObj = JSON.parse(this.responseText);							
+				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
+				document.getElementById('blockRewards').value = myObj.data[0][3];
+			}
+		};
+		xmlhttp.open("GET", "num.json", true);
+		xmlhttp.send();		
+		run();
  var run = function() {
                 var stakingAmount = document.getElementById('stakingAmount').value; 
                 var totalStaking = document.getElementById('totalStaking').value;
