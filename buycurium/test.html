@@ -70,8 +70,8 @@
 			}
 		};
 		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();	//-->	
-		run();
+		xmlhttp.send();		
+		run();//-->
 	</script>
 </head>
 <body>
@@ -158,7 +158,6 @@
 		};
 		xmlhttp.open("GET", "num.json", true);
 		xmlhttp.send();		
-		run();
  var run = function() {
                 var stakingAmount = document.getElementById('stakingAmount').value; 
                 var totalStaking = document.getElementById('totalStaking').value;
@@ -196,5 +195,6 @@
             lockedInInput.addEventListener('change', run);	
             blockRewardsInput.addEventListener('keyup', run);
             blockRewardsInput.addEventListener('change', run);			
+			run();
 </script>
 </html>
