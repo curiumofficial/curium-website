@@ -164,7 +164,7 @@
                 var lockedIn = document.getElementById('lockedIn').value;
 				var blockRewards = document.getElementById('blockRewards').value;
                 // Minting probabilities
-                var staked = totalStaking - lockedIn;
+                var staked = totalStaking;
                 var dailyStakes = stakingAmount/staked*60*24;
                 var weeklyStakes = (dailyStakes*7);
                 var monthlyStakes = (dailyStakes*30);
