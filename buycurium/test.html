@@ -86,11 +86,6 @@
                         <td><input type="number" id="totalStaking" value=""></td>
                     </tr>
                     <tr>
-                        <td><label id="entry_diflty">POS difficulty</label></td>
-                        <td><input type="number" id="lockedIn" value=""></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
                         <td><label id="entry_difficulty">POS difficulty</label></td>
                         <td><input type="number" id="blockRewards" value=""></td>
                         <td>&nbsp;</td>
@@ -143,16 +138,6 @@
 			if (this.readyState == 4 && this.status == 200) {
 				var myObj = JSON.parse(this.responseText);							
 				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
-				document.getElementById('lockedIn').value = myObj.data[0][2];
-			}
-		};
-		xmlhttp.open("GET", "num.json", true);
-		xmlhttp.send();
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var myObj = JSON.parse(this.responseText);							
-				<!-- for(var j = 0; j < myObj.curium.length; j++){ -->
 				document.getElementById('blockRewards').value = myObj.data[0][3];
 			}
 		};
@@ -161,7 +146,6 @@
  var run = function() {
                 var stakingAmount = document.getElementById('stakingAmount').value; 
                 var totalStaking = document.getElementById('totalStaking').value;
-                var lockedIn = document.getElementById('lockedIn').value;
 				var blockRewards = document.getElementById('blockRewards').value;
                 // Minting probabilities
                 var staked = totalStaking;
@@ -184,15 +168,12 @@
             // Calculate the POS reward dynamically, without having to press a button
             var totalStakingInput = document.querySelector('#totalStaking');
             var stakingAmountInput = document.querySelector('#stakingAmount');
-            var lockedInInput = document.querySelector('#lockedIn');
 			var blockRewardsInput = document.querySelector('#blockRewards');
             // Reward is calculated when typing or when the input loses focus
             totalStakingInput.addEventListener('keyup', run);
             totalStakingInput.addEventListener('change', run);
             stakingAmountInput.addEventListener('keyup', run);
             stakingAmountInput.addEventListener('change', run);
-            lockedInInput.addEventListener('keyup', run);
-            lockedInInput.addEventListener('change', run);	
             blockRewardsInput.addEventListener('keyup', run);
             blockRewardsInput.addEventListener('change', run);			
 			run();
